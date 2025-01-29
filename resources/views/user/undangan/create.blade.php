@@ -23,7 +23,7 @@
                   <div class="card shadow-sm">
                     <h5 class="card-header text-center">Form Agenda Surat</h5>
                     <div class="card-body">
-                        <form action="{{ route('undangan.store') }}" method="POST">
+                      <form action="{{ url('undangan/create') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                           <label for="tanggal_surat" class="form-label">Tanggal</label>
@@ -54,14 +54,14 @@
                         <div class="mb-3">
                           <label class="form-label">Tanggal Penyelenggaraan</label>
                           <div class="d-flex gap-2">
-                            <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" required />
+                            <input type="date" class="form-control" id="penyelenggaraan_mulai" name="penyelenggaraan_mulai" required />
                             <span class="align-self-center">s.d</span>
-                            <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai" required />
+                            <input type="date" class="form-control" id="penyelenggaraan_selesai" name="penyelenggaraan_selesai" required />
                           </div>
                         </div>
                         <div class="mb-3">
                           <label class="form-label">Klasifikasi</label>
-                          <select class="form-select" id="klasifikasi" name="klasifikasi" required>
+                          <select class="form-select" id="klasifikasi_id" name="klasifikasi_id" required>
                             <option value="" disabled selected>Pilih Klasifikasi</option>
                             @foreach($klasifikasi as $item)
                               <option value="{{ $item->id }}">{{ $item->nama_klasifikasi }}</option>

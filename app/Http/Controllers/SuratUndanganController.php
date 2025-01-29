@@ -24,7 +24,11 @@ class SuratUndanganController extends Controller
 
         // Simpan file jika ada
         if ($request->hasFile('template_surat')) {
-            $filePath = $request->file('template_surat')->store('templates', 'public');
+           $filePath = $request->file('template_surat')->storeAs(
+    'templates',
+    time().'_'.$request->file('template_surat')->getClientOriginalName(),
+    'public'
+);
         } else {
             $filePath = null;
         }
