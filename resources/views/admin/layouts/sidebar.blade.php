@@ -159,6 +159,13 @@
           </li>
 
           <li class="menu-item">
+            <a href="{{route('admin.undangan.undangan')}}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-folder"></i>
+              <div data-i18n="Tables">Surat Undangan</div>
+            </a>
+          </li>
+
+          <li class="menu-item">
             <form method="POST" action="{{ route('logout') }}" id="logout-form">
               @csrf
               <a href="#" class="menu-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

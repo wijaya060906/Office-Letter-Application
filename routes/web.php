@@ -58,7 +58,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         $SuratTugas = SuratTugas::all();
         return view('admin.surattugas.suratTugas',compact('SuratTugas'));
     })->name('admin.surattugas.surattugas');
+
     
+    Route::get('/admin/undangan',function(){
+        $Undangan = SuratUndangan::with('klasifikasi')->get();
+        return view('admin.undangan.undangan',compact('Undangan'));
+    })->name('admin.undangan.undangan');
 });
 
 
