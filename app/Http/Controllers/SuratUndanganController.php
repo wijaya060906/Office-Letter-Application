@@ -50,23 +50,25 @@ class SuratUndanganController extends Controller
     }
 
 
-    public function store(Request $request)
-    {
-        // Validasi input nomor surat
-        $validatedData = $request->validate([
-            'nomor_surat' => 'required|string|max:255',
-        ]);
+    public function store(Request $request, $id)
+{
+    // Validasi input
+    $request->validate([
+        'nomor_surat' => 'required|string|max:255',
+    ]);
 
-        // Menyimpan nomor surat ke database
-        $undangan = new SuratUndangan();
-        $undangan->nomor_surat = $validatedData['nomor_surat'];
-        $undangan->save();
-
-        // Mengembalikan respons JSON
-        return response()->json([
-            'success' => true,
-            'message' => 'Nomor surat berhasil disimpan.',
-        ]);
+    // Cari surat berdasarkan ID
+    $surat = SuratUndangan::find($id);
+    if (!$surat) {
+        abort(404, 'Surat tidak ditemukan');
     }
+
+    // Update nomor surat
+    $surat->nomor_surat = $request->nomor_surat;
+    $surat->save(); // Simpan ke database
+
+    return redirect()->route('admin.undangan.undangan')->with('success', 'Nomor surat berhasil disimpan!');
+}
+
 
 }
