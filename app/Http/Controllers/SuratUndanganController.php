@@ -45,8 +45,28 @@ class SuratUndanganController extends Controller
             'klasifikasi_id' => $request->klasifikasi_id,
             'template_surat' => $filePath,
         ]);
-        dd($request->all());
 
         return redirect()->route('surattugas.create')->with('success', 'Agenda berhasil disimpan!');
     }
+
+
+    public function store(Request $request)
+    {
+        // Validasi input nomor surat
+        $validatedData = $request->validate([
+            'nomor_surat' => 'required|string|max:255',
+        ]);
+
+        // Menyimpan nomor surat ke database
+        $undangan = new SuratUndangan();
+        $undangan->nomor_surat = $validatedData['nomor_surat'];
+        $undangan->save();
+
+        // Mengembalikan respons JSON
+        return response()->json([
+            'success' => true,
+            'message' => 'Nomor surat berhasil disimpan.',
+        ]);
+    }
+
 }
