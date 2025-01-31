@@ -98,45 +98,23 @@
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Tanggal Surat</th>
-                        <th>Perihal</th>
-                        <th>Kepada/Tujuan</th>
-                        <th>Permohonan Tempat</th>
-                        <th>Konsumsi</th>
-                        <th>Tanggal Pelaksanaan</th>
-                        <th>Templete Surat</th>
-                        <th>Nomor Surat</th>
-                        <th>Naskah Surat</th>
+                        <th>username</th>
+                        <th>Email</th>
+                        <th>password</th>
+                        <th>Aksi</th>
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @foreach($Undangan as $item)
+                        @foreach($user as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->tanggal_surat }}</td>
-                            <td>{{ $item->perihal }}</td>
-                            <td> {{ $item->klasifikasi->nama_klasifikasi }} / {{ $item->kepada }}</td>
-                            <td>{{ $item->permohonan_tempat }}</td>
-                            <td>{{ $item->permohonan_konsumsi }}</td>
-                            <td>{{ $item->penyelenggaraan_mulai }} - {{ $item->penyelenggaraan_selesai }}</td>
-                            <td>{{ $item->template_surat }}</td>
+                            <td>{{ $item->username }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->password }}</td>
                             <td>
-                                @if($item->nomor_surat)
-                                    {{ $item->nomor_surat }}
-                                @else
-                                    Waiting
-                                @endif
+                                <button type="button">edit</button>
+                                <button type="button">destroy</button>
                             </td>
-                            <td>
-                                @if($item->naskah_surat)
-                                    {{ $item->naskah_surat }}
-                                @else
-                                    Waiting
-                                @endif
-                            </td>
-                            
-                            
-                            
                             
                         </tr>
                         @endforeach

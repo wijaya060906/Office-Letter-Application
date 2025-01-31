@@ -166,6 +166,13 @@
           </li>
 
           <li class="menu-item">
+            <a href="{{route('admin.pemohon')}}" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-group"></i>
+              <div data-i18n="Tables">Pemohon</div>
+            </a>
+          </li>
+
+          <li class="menu-item">
             <form method="POST" action="{{ route('logout') }}" id="logout-form">
               @csrf
               <a href="#" class="menu-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -8,6 +8,7 @@ use App\Models\Klasifikasi;
 use App\Models\SuratTugas;
 use App\Models\SuratUndangan;
 use App\Models\UndanganModel;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,6 +65,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         $Undangan = SuratUndangan::with('klasifikasi')->get();
         return view('admin.undangan.undangan',compact('Undangan'));
     })->name('admin.undangan.undangan');
+
+    Route::get('/admin/pemohon',function(){
+        $user = User::all();
+        return view('admin.pemohon.pemohon',compact('user'));
+    })->name('admin.pemohon');
 });
 
 
