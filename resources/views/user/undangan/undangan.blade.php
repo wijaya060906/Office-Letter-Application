@@ -127,7 +127,7 @@
                             </td>
                             <td>
                                 @if($item->naskah_surat)
-                                    {{ $item->naskah_surat }}
+                                <a href="{{ route('surat.downloadNaskah', ['id' => $item->id]) }}" class="btn btn-primary">Unduh Naskah</a>
                                 @else
                                     Waiting
                                 @endif

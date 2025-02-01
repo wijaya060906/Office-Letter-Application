@@ -30,14 +30,14 @@
                 <!-- Username -->
                 <div>
                     <x-input-label for="username" :value="__('Username')" class="text-gray-700" />
-                    <x-text-input id="username" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
+                    <x-text-input id="username" class="block mt-4 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
                     <x-input-error :messages="$errors->get('username')" class="mt-2 text-red-500 text-sm" />
                 </div>
 
                 <!-- Password -->
                 <div class="mt-4">
                     <x-input-label for="password" :value="__('Password')" class="text-gray-700" />
-                    <x-text-input id="password" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg" type="password" name="password" required autocomplete="current-password" />
+                    <x-text-input id="password" class="block mt-4 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg" type="password" name="password" required autocomplete="current-password" />
                     <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-500 text-sm" />
                 </div>
 

@@ -71,4 +71,66 @@ class SuratUndanganController extends Controller
 }
 
 
+public function download($id)
+{
+    $surat = SuratUndangan::find($id);
+
+    if (!$surat || !$surat->template_surat) {
+        return redirect()->back()->with('error', 'File tidak ditemukan.');
+    }
+
+    $filePath = storage_path('app/public/' . $surat->template_surat);
+
+    if (!file_exists($filePath)) {
+        return redirect()->back()->with('error', 'File tidak ditemukan di server.');
+    }
+
+    return response()->download($filePath);
+}
+
+public function uploadNaskah(Request $request, $id)
+{
+    // Validasi file
+    $request->validate([
+        'naskah_surat' => 'required|file|mimes:pdf,doc,docx|max:2048',
+    ]);
+
+    // Cari surat berdasarkan ID
+    $surat = SuratUndangan::find($id);
+    if (!$surat) {
+        return redirect()->back()->with('error', 'Surat tidak ditemukan.');
+    }
+
+    // Simpan file ke storage
+    $filePath = $request->file('naskah_surat')->storeAs(
+        'naskah_surat',
+        time() . '_' . $request->file('naskah_surat')->getClientOriginalName(),
+        'public'
+    );
+
+    // Simpan path file ke database
+    $surat->naskah_surat = $filePath;
+    $surat->save();
+
+    return redirect()->back()->with('success', 'Naskah surat berhasil diunggah.');
+}
+
+public function downloadNaskah($id)
+{
+    $surat = SuratUndangan::find($id);
+
+    if (!$surat || !$surat->naskah_surat) {
+        return redirect()->back()->with('error', 'File tidak ditemukan.');
+    }
+
+    $filePath = storage_path('app/public/' . $surat->naskah_surat);
+
+    if (!file_exists($filePath)) {
+        return redirect()->back()->with('error', 'File tidak ditemukan di server.');
+    }
+
+    return response()->download($filePath);
+}
+
+
 }

@@ -67,7 +67,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     })->name('admin.undangan.undangan');
 
     Route::post('/admin/nomorsurat/{id}', [SuratUndanganController::class, 'store'])->name('undangan.nomor');
-
+    Route::get('/surat/download/{id}', [SuratUndanganController::class, 'download'])->name('surat.download');
+    Route::post('/surat/upload-naskah/{id}', [SuratUndanganController::class, 'uploadNaskah'])->name('surat.uploadNaskah');
+    
+    
     Route::get('/admin/pemohon',function(){
         $user = User::all();
         return view('admin.pemohon.pemohon',compact('user'));
@@ -80,17 +83,17 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user/dashboard', function () {
         return view('user.dashboard');
     })->name('user.dashboard');
-
+    
     Route::get('/user/surattugas',function(){
         $SuratTugas = SuratTugas::all();
         return view('user.surat tugas.suratTugas',compact('SuratTugas'));
     })->name('user.surattugas.surattugas');
-
+    
     Route::get('/user/undangan',function(){
         $Undangan = SuratUndangan::with('klasifikasi')->get();
         return view('user.undangan.undangan',compact('Undangan'));
     })->name('user.undangan.undangan');
-
+    
     
     Route::get('/user/surattugas/create', function () {
         $klasifikasi = Klasifikasi::all(); // Ambil semua data klasifikasi
@@ -102,7 +105,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
         $klasifikasi = Klasifikasi::all();
         return view('user.undangan.create', compact('klasifikasi'));
     })->name('undangan.create');
-
+    
+    Route::get('/surat/download-naskah/{id}', [SuratUndanganController::class, 'downloadNaskah'])->name('surat.downloadNaskah');
     Route::post('/surattugas/create', [SuratTugasController::class, 'store'])->name('surattugas.store');
     Route::post('/surattugas/generate', [SuratTugasController::class, 'generate'])->name('surattugas.generate');
     Route::post('/surat/{id}/upload', [SuratTugasController::class, 'upload'])->name('surat.upload');

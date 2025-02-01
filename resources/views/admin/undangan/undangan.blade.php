@@ -82,7 +82,14 @@
                                                 <td>{{ $item->permohonan_konsumsi }}</td>
                                                 <td>{{ $item->penyelenggaraan_mulai }} -
                                                     {{ $item->penyelenggaraan_selesai }}</td>
-                                                <td>{{ $item->template_surat }}</td>
+                                                    <td>
+                                                      @if ($item->template_surat)
+                                                          <a href="{{ route('surat.download', ['id' => $item->id]) }}" class="btn btn-primary">Unduh</a>
+                                                      @else
+                                                          Nothing
+                                                      @endif
+                                                  </td>
+                                                  
                                                 <td>
                                                     @if ($item->nomor_surat)
                                                         {{ $item->nomor_surat }}
@@ -91,12 +98,20 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    @if ($item->naskah_surat)
-                                                        {{ $item->naskah_surat }}
-                                                    @else
-                                                        Waiting
-                                                    @endif
-                                                </td>
+                                                  @if ($item->naskah_surat)
+                                                      <span class="text-success">Sudah diunggah</span>
+                                                  @else
+                                                      <form action="{{ route('surat.uploadNaskah', ['id' => $item->id]) }}" method="POST" enctype="multipart/form-data" class="d-flex align-items-center">
+                                                          @csrf
+                                                          <label class="btn btn-primary btn-sm mb-0 me-2">
+                                                              Pilih File
+                                                              <input type="file" name="naskah_surat" class="d-none" onchange="this.form.submit()">
+                                                          </label>
+                                                      </form>
+                                                  @endif
+                                              </td>
+                                              
+                                                                                            
                                                 <td>
                                                     <a href="javascript:void(0);" class="btn btn-primary btn-sm"
                                                         onclick="showToast({{ $item->id }}, '{{ route('undangan.nomor', $item->id) }}')">
