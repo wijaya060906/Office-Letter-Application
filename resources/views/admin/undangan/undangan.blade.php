@@ -117,13 +117,33 @@
                                                         onclick="showToast({{ $item->id }}, '{{ route('undangan.nomor', $item->id) }}')">
                                                         Nomor Surat
                                                     </a>
-                                                    <a href="" class="btn btn-warning btn-sm">Edit</a>
-                                                    <form action="" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
-                                                    </form>
+                                                    <a href="{{route('undangan.edit',$item->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $item->id }}">
+                                                      Hapus
+                                                  </button>
+                                                  
+                                                  <!-- Modal Konfirmasi -->
+                                                  <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                                      <div class="modal-dialog">
+                                                          <div class="modal-content">
+                                                              <div class="modal-header">
+                                                                  <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                              </div>
+                                                              <div class="modal-body">
+                                                                  Apakah Anda yakin ingin menghapus data ini?
+                                                              </div>
+                                                              <div class="modal-footer">
+                                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                                  <form action="{{ route('surat.destroy', ['id' => $item->id]) }}" method="POST" style="display:inline;">
+                                                                      @csrf
+                                                                      @method('DELETE')
+                                                                      <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                                                  </form>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
                                                 </td>
                                             </tr>
                                         @endforeach

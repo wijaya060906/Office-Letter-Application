@@ -69,8 +69,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/nomorsurat/{id}', [SuratUndanganController::class, 'store'])->name('undangan.nomor');
     Route::get('/surat/download/{id}', [SuratUndanganController::class, 'download'])->name('surat.download');
     Route::post('/surat/upload-naskah/{id}', [SuratUndanganController::class, 'uploadNaskah'])->name('surat.uploadNaskah');
-    
-    
+    Route::delete('/surat/{id}', [SuratUndanganController::class, 'destroy'])->name('surat.destroy');
+
+    Route::get('/undangan/{id}/edit', [SuratUndanganController::class, 'edit'])->name('undangan.edit');
+    Route::post('/undangan/{id}/update', [SuratUndanganController::class, 'update'])->name('undangan.update');
+
     Route::get('/admin/pemohon',function(){
         $user = User::all();
         return view('admin.pemohon.pemohon',compact('user'));

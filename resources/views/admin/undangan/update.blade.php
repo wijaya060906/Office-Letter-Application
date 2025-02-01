@@ -23,60 +23,63 @@
                   <div class="card shadow-sm">
                     <h5 class="card-header text-center">Form Agenda Surat</h5>
                     <div class="card-body">
-                      <form action="{{ url('undangan/create') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="mb-3">
-                          <label for="tanggal_surat" class="form-label">Tanggal</label>
-                          <input type="date" class="form-control" id="tanggal_surat" name="tanggal_surat" required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="perihal" class="form-label">Perihal</label>
-                          <input type="text" class="form-control" id="perihal" name="perihal" required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="kepada" class="form-label">Kepada</label>
-                          <textarea class="form-control" id="kepada" name="kepada" rows="2" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Permohonan Tempat/Aula</label>
-                          <select class="form-select" id="permohonan_tempat" name="permohonan_tempat" required>
-                            <option value="tidak">Tidak</option>
-                            <option value="ya">Ya</option>
-                          </select>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Permohonan Konsumsi</label>
-                          <select class="form-select" id="permohonan_konsumsi" name="permohonan_konsumsi" required>
-                            <option value="tidak">Tidak</option>
-                            <option value="ya">Ya</option>
-                          </select>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Tanggal Penyelenggaraan</label>
-                          <div class="d-flex gap-2">
-                            <input type="date" class="form-control" id="penyelenggaraan_mulai" name="penyelenggaraan_mulai" required />
-                            <span class="align-self-center">s.d</span>
-                            <input type="date" class="form-control" id="penyelenggaraan_selesai" name="penyelenggaraan_selesai" required />
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Klasifikasi</label>
-                          <select class="form-select" id="klasifikasi_id" name="klasifikasi_id" required>
-                            <option value="" disabled selected>Pilih Klasifikasi</option>
-                            @foreach($klasifikasi as $item)
-                              <option value="{{ $item->id }}">{{ $item->nama_klasifikasi }}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Unggah Template Surat</label>
-                          <input type="file" class="form-control" id="template_surat" name="template_surat" />
-                        </div>
-                        <div class="d-flex justify-content-between">
-                          <button type="reset" class="btn btn-secondary">Batal</button>
-                          <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                      </form>
+                        <form action="{{ route('undangan.update', $surat->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="tanggal_surat" class="form-label">Tanggal</label>
+                                <input type="date" class="form-control" id="tanggal_surat" name="tanggal_surat" value="{{ $surat->tanggal_surat }}" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="perihal" class="form-label">Perihal</label>
+                                <input type="text" class="form-control" id="perihal" name="perihal" value="{{ $surat->perihal }}" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="kepada" class="form-label">Kepada</label>
+                                <textarea class="form-control" id="kepada" name="kepada" rows="2" required>{{ $surat->kepada }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Permohonan Tempat/Aula</label>
+                                <select class="form-select" id="permohonan_tempat" name="permohonan_tempat" required>
+                                    <option value="tidak" {{ $surat->permohonan_tempat == 'tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="ya" {{ $surat->permohonan_tempat == 'ya' ? 'selected' : '' }}>Ya</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Permohonan Konsumsi</label>
+                                <select class="form-select" id="permohonan_konsumsi" name="permohonan_konsumsi" required>
+                                    <option value="tidak" {{ $surat->permohonan_konsumsi == 'tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="ya" {{ $surat->permohonan_konsumsi == 'ya' ? 'selected' : '' }}>Ya</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tanggal Penyelenggaraan</label>
+                                <div class="d-flex gap-2">
+                                    <input type="date" class="form-control" id="penyelenggaraan_mulai" name="penyelenggaraan_mulai" value="{{ $surat->penyelenggaraan_mulai }}" required />
+                                    <span class="align-self-center">s.d</span>
+                                    <input type="date" class="form-control" id="penyelenggaraan_selesai" name="penyelenggaraan_selesai" value="{{ $surat->penyelenggaraan_selesai }}" required />
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Klasifikasi</label>
+                                <select class="form-select" id="klasifikasi_id" name="klasifikasi_id" required>
+                                    <option value="" disabled>Pilih Klasifikasi</option>
+                                    @foreach($klasifikasi as $item)
+                                        <option value="{{ $item->id }}" {{ $surat->klasifikasi_id == $item->id ? 'selected' : '' }}>{{ $item->nama_klasifikasi }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Unggah Template Surat</label>
+                                <input type="file" class="form-control" id="template_surat" name="template_surat" />
+                                @if ($surat->template_surat)
+                                    <p class="mt-2">File sebelumnya: <a href="{{ asset('storage/' . $surat->template_surat) }}" target="_blank">Lihat file</a></p>
+                                @endif
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('admin.undangan.undangan') }}" class="btn btn-secondary">Batal</a>
+                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                            </div>
+                        </form>
                     </div>
                   </div>
                 </div>
