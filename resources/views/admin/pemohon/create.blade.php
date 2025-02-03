@@ -13,7 +13,7 @@
   <body>
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
-        @include('user.layouts.sidebar')
+        @include('admin.layouts.sidebar')
         <div class="layout-page">
           <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -23,19 +23,19 @@
                   <div class="card shadow-sm">
                     <h5 class="card-header text-center">Form Agenda Surat</h5>
                     <div class="card-body">
-                      <form action="{{ url('undangan/create') }}" method="POST" enctype="multipart/form-data">
+                      <form action="{{route('users.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                          <label for="tanggal_surat" class="form-label">Tanggal</label>
-                          <input type="date" class="form-control" id="tanggal_surat" name="tanggal_surat" required />
+                          <label for="username" class="form-label">Username</label>
+                          <input type="text" class="form-control" id="username" name="username" required />
                         </div>
                         <div class="mb-3">
-                          <label for="perihal" class="form-label">Perihal</label>
-                          <input type="text" class="form-control" id="perihal" name="perihal" required />
+                          <label for="email" class="form-label">Email</label>
+                          <input type="text" class="form-control" id="email" name="email" required />
                         </div>
                         <div class="mb-3">
-                          <label for="kepada" class="form-label">Kepada</label>
-                          <textarea class="form-control" id="kepada" name="kepada" rows="2" required></textarea>
+                          <label for="password" class="form-label">Password</label>
+                          <textarea class="form-control" id="password" name="password" rows="2" required></textarea>
                         </div>
                         <div class="d-flex justify-content-between">
                           <button type="reset" class="btn btn-secondary">Batal</button>

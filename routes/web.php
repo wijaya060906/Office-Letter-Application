@@ -4,6 +4,7 @@ use App\Http\Controllers\KlasifikasiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuratTugasController;
 use App\Http\Controllers\SuratUndanganController;
+use App\Http\Controllers\UserController;
 use App\Models\Klasifikasi;
 use App\Models\SuratTugas;
 use App\Models\SuratUndangan;
@@ -78,6 +79,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         $user = User::all();
         return view('admin.pemohon.pemohon',compact('user'));
     })->name('admin.pemohon');
+
+    Route::get('/admin/pemohon/create',function(){
+        return view('admin.pemohon.create');
+    })->name('pemohon.create');
+
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
 });
 
 

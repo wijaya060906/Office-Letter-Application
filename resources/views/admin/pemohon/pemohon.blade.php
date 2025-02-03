@@ -112,9 +112,34 @@
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->password }}</td>
                             <td>
-                                <button type="button">edit</button>
-                                <button type="button">destroy</button>
-                            </td>
+                              <a href="{{route('users.update',$item->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                              <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $item->id }}">
+                                Hapus
+                            </button>
+                            
+                            <!-- Modal Konfirmasi -->
+                            <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah Anda yakin ingin menghapus data ini?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <form action="{{ route('users.destroy', ['id' => $item->id]) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </td>
                             
                         </tr>
                         @endforeach
@@ -136,10 +161,10 @@
     <!-- / Layout wrapper -->
     <div class="buy-now">
       <a
-        href="{{route('undangan.create')}}"
+        href="{{route('pemohon.create')}}"
         target="_blank"
         class="btn btn-danger btn-buy-now"
-        >Buat Surat Undangan</a
+        >Buat Pemohon</a
       >
     </div>
     <!-- Core JS -->
