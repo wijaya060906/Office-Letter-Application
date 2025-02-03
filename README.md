@@ -59,4 +59,4 @@ This application was developed by **Yusan Pamungkas Wijaya**. 🎉
 
 ## License 📜
 
-This project is licensed under the MIT.
+This project is licensed under the BPS.
