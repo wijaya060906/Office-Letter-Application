@@ -17,21 +17,17 @@
         <div class="layout-page">
           <div class="content-wrapper">
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4 text-center">Agenda Nomor Surat Undangan</h4>
+              <h4 class="fw-bold py-3 mb-4 text-center">Tambah Pemohon</h4>
               <div class="d-flex justify-content-center">
                 <div class="col-md-8">
                   <div class="card shadow-sm">
-                    <h5 class="card-header text-center">Form Agenda Surat</h5>
+                    <h5 class="card-header text-center">Form Tambah Pemohon</h5>
                     <div class="card-body">
                       <form action="{{route('users.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                           <label for="username" class="form-label">Username</label>
                           <input type="text" class="form-control" id="username" name="username" required />
-                        </div>
-                        <div class="mb-3">
-                          <label for="email" class="form-label">Email</label>
-                          <input type="text" class="form-control" id="email" name="email" required />
                         </div>
                         <div class="mb-3">
                           <label for="password" class="form-label">Password</label>

@@ -19,7 +19,6 @@ class UserController extends Controller
 
         $user = User::create([
             'username' => $request->username,
-            'email' => $request->email,
             'password' => Hash::make($request->password), // Enkripsi password
             'role' => 'user', // Default role
         ]);
@@ -36,7 +35,6 @@ class UserController extends Controller
 
         $request->validate([
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|min:6',
         ]);
 

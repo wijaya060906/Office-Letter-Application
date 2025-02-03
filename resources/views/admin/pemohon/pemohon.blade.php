@@ -99,7 +99,6 @@
                       <tr>
                         <th>No</th>
                         <th>username</th>
-                        <th>Email</th>
                         <th>password</th>
                         <th>Aksi</th>
                       </tr>
@@ -109,7 +108,6 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->username }}</td>
-                            <td>{{ $item->email }}</td>
                             <td>{{ $item->password }}</td>
                             <td>
                               <a href="{{route('users.update',$item->id)}}" class="btn btn-warning btn-sm">Edit</a>
