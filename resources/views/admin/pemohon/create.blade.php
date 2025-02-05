@@ -23,7 +23,7 @@
                   <div class="card shadow-sm">
                     <h5 class="card-header text-center">Form Tambah Pemohon</h5>
                     <div class="card-body">
-                      <form action="{{route('users.store')}}" method="POST" enctype="multipart/form-data">
+                      <form action="{{url('users')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                           <label for="username" class="form-label">Username</label>
