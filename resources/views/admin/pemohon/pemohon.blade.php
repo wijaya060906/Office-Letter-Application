@@ -110,7 +110,7 @@
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->password }}</td>
                             <td>
-                              <a href="{{route('users.update',$item->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                              <a href="{{route('users.edit',$item->id)}}" class="btn btn-warning btn-sm">Edit</a>
                               <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $item->id }}">
                                 Hapus
                             </button>

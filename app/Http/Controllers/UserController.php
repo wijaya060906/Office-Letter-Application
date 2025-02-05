@@ -22,23 +22,24 @@ class UserController extends Controller
             'role' => 'user', // Default role
         ]);
 
-        return redirect()->back()->with('success', 'User berhasil ditambahkan.');
+        return redirect()->route('admin.pemohon')->with('success', 'User berhasil ditambahkan.');
+    }
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.pemohon.update', compact('user'));
     }
 
-    /**
-     * Update the specified user in storage.
-     */
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
 
         $request->validate([
-            'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'username' => 'required|string|max:255',
             'password' => 'nullable|min:6',
         ]);
 
         $user->username = $request->username;
-        $user->email = $request->email;
 
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
@@ -46,8 +47,11 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->back()->with('success', 'User berhasil diperbarui.');
+        return redirect()->route('admin.pemohon')->with('success', 'User berhasil diperbarui!');
     }
+    /**
+     * Update the specified user in storage.
+     */
 
     public function destroy($id)
 {
